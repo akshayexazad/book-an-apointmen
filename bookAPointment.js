@@ -23,18 +23,16 @@ function saveToLocalStorage(event) {
     // localStorage.setItem(obj.email, JSON.stringify(obj))
     // showNewUserOnScreen(obj)
 }
+   window.addEventListener("DOMContentLoaded", () => {
+    axios.get("https://crudcrud.com/api/ba1ccf0acf6b4505ac8ac620143fa292/addnew")
+    .then((res)=>{
+        for(i=0;i<res.data.length;i++){
+            showNewUserOnScreen(res.data[i])
+        }
+        console.log(res)})
+    .catch((err)=>{console.log(err)})
 
-// window.addEventListener("DOMContentLoaded", () => {
-//     const localStorageObj = localStorage;
-//     const localstoragekeys  = Object.keys(localStorageObj)
-
-//     for(var i =0; i< localstoragekeys.length; i++){
-//         const key = localstoragekeys[i]
-//         const userDetailsString = localStorageObj[key];
-//         const userDetailsObj = JSON.parse(userDetailsString);
-//         showNewUserOnScreen(userDetailsObj)
-//     }
-// })
+ })
 
 function showNewUserOnScreen(user){
     document.getElementById('email').value = '';
@@ -69,9 +67,12 @@ function editUserDetails(emailId, name, phonenumber){
 // deleteUser('abc@gmail.com')
 
 function deleteUser(emailId){
-    console.log(emailId)
-    localStorage.removeItem(emailId);
-    removeUserFromScreen(emailId);
+   axios.delete(`https://crudcrud.com/api/ba1ccf0acf6b4505ac8ac620143fa292/addnew/${emailId}`)
+   .then((res)=>{
+    removeUserFromScreen(emailId)
+   }).catch((err)=>{
+    console.log(err)
+   })
 
 }
 
