@@ -67,9 +67,12 @@ function editUserDetails(emailId, name, phonenumber){
 // deleteUser('abc@gmail.com')
 
 function deleteUser(emailId){
-    console.log(emailId)
-    localStorage.removeItem(emailId);
-    removeUserFromScreen(emailId);
+   axios.delete(`https://crudcrud.com/api/ba1ccf0acf6b4505ac8ac620143fa292/addnew/${emailId}`)
+   .then((res)=>{
+    removeUserFromScreen(emailId)
+   }).catch((err)=>{
+    console.log(err)
+   })
 
 }
 
